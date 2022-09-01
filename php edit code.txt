@@ -1,0 +1,51 @@
+
+
+
+
+
+
+
+<?php 
+include("connection.php");
+if (isset($_GET["id"])){
+	$editId = $_GET["id"];
+	$sql = "SELECT * FROM students WHERE id = $editId";
+	$runQuery = mysqli_query($connect,$sql);
+	while($row = mysqli_fetch_array($runQuery)){
+		?>
+<div class="form">
+<h3> Edit this form  </h3>
+<form action="edit_core.php"method="POST">
+  <div class="mb-3">
+    <label for="name" >Name</label>
+    <input type="text"class="form-control" name="name" value="<?php echo $row["name"];?>">
+  </div>
+  <div class="mb-3">
+    <label for="roll">Roll</label>
+    <input type="text" class="form-control" name ="roll"value="<?php echo $row["roll"];?>">
+  </div>
+   <div class="mb-3">
+      <label for="class">Class</label>
+      <input type="text" name="class"class="form-control" value="<?php echo $row["class"];?>">
+    </div>
+		<div class="mb-3">
+	  <label for="image">Select image:</label>
+  <input type="file" id="image"class="form-control" name="image" accept="image/*">
+	</div>
+	
+	 <div class="mb-3">
+    <input type="hidden"  name ="editingId"value="<?php echo $editId?>" >
+  </div>
+  <input type="submit"name="submit">
+</form>
+</div>
+		<?php
+	}
+}
+?>
+
+
+
+
+
+
